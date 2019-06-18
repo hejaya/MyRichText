@@ -12,11 +12,12 @@ import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import jp.wasabeef.richeditor.RichEditor;
+
 import com.afollestad.materialdialogs.MaterialDialog;
+
 public class MainActivity extends Activity {
-
-
 
 
     private RichEditor mEditor;
@@ -29,7 +30,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_1);
         mEditor = (RichEditor) findViewById(R.id.editor);
 
         //初始化编辑高度
@@ -348,6 +349,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 mEditor.focusEditor();
+
                 ActivityCompat.requestPermissions(MainActivity.this, mPermissionList, 100);
             }
         });
@@ -433,12 +435,17 @@ public class MainActivity extends Activity {
             switch (requestCode) {
                 case REQUEST_PICK_IMAGE:
                     if (data != null) {
-                        String realPathFromUri = RealPathFromUriUtils.getRealPathFromUri(this, data.getData());
+                        String html = mEditor.getHtml();
+                        System.out.println(html);
+                        html += "\n" +
+                                "<img src=\"https://unsplash.it/2000/2000?random&58\" alt=\"Smiley face\" width=\"42\" height=\"42\">\n";
+                        /*String realPathFromUri = RealPathFromUriUtils.getRealPathFromUri(this, data.getData());
                         mEditor.insertImage("https://unsplash.it/2000/2000?random&58",
                                 "huangxiaoguo\" style=\"max-width:100%");
-                        mEditor.insertImage(realPathFromUri, realPathFromUri + "\" style=\"max-width:100%");
+                        mEditor.insertImage(realPathFromUri, realPathFromUri + "\" style=\"max-width:100%");*/
 //                        mEditor.insertImage(realPathFromUri, realPathFromUri + "\" style=\"max-width:100%;max-height:100%");
-
+                        mEditor.setHtml(html);
+                        System.out.println(html);
                     } else {
                         Toast.makeText(this, "图片损坏，请重新选择", Toast.LENGTH_SHORT).show();
                     }

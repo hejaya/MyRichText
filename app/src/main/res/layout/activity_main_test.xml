@@ -31,7 +31,13 @@
 
         </LinearLayout>-->
 
-        <jp.wasabeef.richeditor.RichEditor
+        <Button
+            android:id="@+id/btn_click"
+            android:text="点价"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.g_three.myrichtext.MyEdittor
             android:id="@+id/editor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
